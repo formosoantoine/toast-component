@@ -1,12 +1,15 @@
 import React from "react";
 
 import styles from "./VariantToast.module.css";
+import { ToastContext, VARIANT_OPTIONS } from "../ToastProvider";
 
-function VariantToast({ variants, checked, handleCheckChange }) {
+function VariantToast() {
+  const { variant, setVariant } = React.useContext(ToastContext);
+
   return (
     <>
       <div className={`${styles.radioWrapper}`}>
-        {variants.map((v) => {
+        {VARIANT_OPTIONS.map((v) => {
           const id = `variant-${v}`;
           return (
             <label key={id} htmlFor={id}>
@@ -15,9 +18,9 @@ function VariantToast({ variants, checked, handleCheckChange }) {
                 type="radio"
                 name="variant"
                 value={v}
-                checked={v === checked}
+                checked={v === variant}
                 onChange={(event) => {
-                  handleCheckChange(event.target.value);
+                  setVariant(event.target.value);
                 }}
               />
               {v}
