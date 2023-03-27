@@ -26,6 +26,8 @@ function ToastProvider({ children }) {
     setToasts((items) => items.filter((t) => t.id !== id));
   }, []);
 
+  const removeAllToasts = React.useCallback(() => setToasts((items) => []), []);
+
   return (
     <ToastContext.Provider
       value={{
@@ -36,6 +38,7 @@ function ToastProvider({ children }) {
         toasts,
         addToast,
         removeToast,
+        removeAllToasts,
       }}
     >
       {children}
